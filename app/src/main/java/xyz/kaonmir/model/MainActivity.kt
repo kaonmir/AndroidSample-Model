@@ -1,19 +1,15 @@
-package xyz.kaonmir.koin
+package xyz.kaonmir.model
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.room.withTransaction
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
-import xyz.kaonmir.koin.model.Soldier
-import xyz.kaonmir.koin.database.AppDatabase
+import xyz.kaonmir.model.model.Soldier
+import xyz.kaonmir.model.database.AppDatabase
 
 class MainActivity : AppCompatActivity() {
     private val db: AppDatabase by inject()

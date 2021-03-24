@@ -1,10 +1,10 @@
-package xyz.kaonmir.koin.dao
+package xyz.kaonmir.model.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import xyz.kaonmir.koin.model.Soldier
+import xyz.kaonmir.model.model.Soldier
 
 @Dao
 interface SoldierDao {

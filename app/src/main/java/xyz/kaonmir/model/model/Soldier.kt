@@ -1,6 +1,5 @@
-package xyz.kaonmir.koin.model
+package xyz.kaonmir.model.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
