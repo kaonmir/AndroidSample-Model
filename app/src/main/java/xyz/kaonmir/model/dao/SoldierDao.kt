@@ -1,10 +1,13 @@
 package xyz.kaonmir.model.dao
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import xyz.kaonmir.model.model.Soldier
+import java.sql.Array
 
 @Dao
 interface SoldierDao {
@@ -20,3 +23,6 @@ interface SoldierDao {
     @Delete
     suspend fun delete(soldier: Soldier)
 }
+
+// todo(should express the "relation" of each entities - 1:N, N:M)
+// todo(transaction annotation)

@@ -8,7 +8,7 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import xyz.kaonmir.model.database.AppDatabase
 
-class KoinApp: Application() {
+class ModelApp: Application() {
     override fun onCreate() {
         super.onCreate()
 
@@ -24,7 +24,7 @@ class KoinApp: Application() {
 
         startKoin {
             androidLogger()                           // Use Koin logger instead of Android logger
-            androidContext(this@KoinApp)// Use this context
+            androidContext(this@ModelApp)// Use this context
             androidFileProperties()     // get properties from "assets/koin.properties"
 
             modules(databaseModule)          // Module list

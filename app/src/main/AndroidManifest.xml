@@ -3,7 +3,7 @@
     package="xyz.kaonmir.model">
 
     <application
-        android:name="xyz.kaonmir.model.KoinApp"
+        android:name="xyz.kaonmir.model.ModelApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

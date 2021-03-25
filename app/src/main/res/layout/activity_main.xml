@@ -20,7 +20,7 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/editTextSerialNumber"
+                android:id="@+id/et_serial_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -33,29 +33,29 @@
                 app:layout_constraintVertical_bias="0.58000004" />
 
             <EditText
-                android:id="@+id/editTextName"
+                android:id="@+id/et_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:ems="10"
                 android:hint="@string/name"
                 android:inputType="text"
-                app:layout_constraintBottom_toTopOf="@+id/editTextSerialNumber"
+                app:layout_constraintBottom_toTopOf="@+id/et_serial_number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
-                android:id="@+id/buttonSubmit"
+                android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/submit"
-                app:layout_constraintEnd_toEndOf="@+id/editTextSerialNumber"
-                app:layout_constraintTop_toBottomOf="@+id/editTextSerialNumber" />
+                app:layout_constraintEnd_toEndOf="@+id/et_serial_number"
+                app:layout_constraintTop_toBottomOf="@+id/et_serial_number" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textViewResult"
+            android:id="@+id/tv_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />

@@ -24,11 +24,7 @@ abstract class AppDatabase: RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DB_NAME)
-                .addCallback(object : RoomDatabase.Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                    }
-                }).build()
+                .addCallback(object : RoomDatabase.Callback() {}).build()
         }
     }
 }
