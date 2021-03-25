@@ -10,18 +10,15 @@ import xyz.kaonmir.model.model.Soldier
 import java.sql.Array
 
 @Dao
-interface SoldierDao {
+interface SoldierDao: BaseDao<Soldier> {
     @Query("SELECT * FROM soldier")
-    suspend fun getAll(): List<Soldier>
+    fun getAll(): LiveData<List<Soldier>>
 
     @Query("SELECT * FROM soldier WHERE serialNumber LIKE ':year-%'")
-    fun getAllByYear(year: Int): List<Soldier>
+    fun getSoldierBySerialNumber(year: Int): LiveData<List<Soldier>>
 
-    @Insert
-    suspend fun insertAll(vararg soldiers: Soldier)
-
-    @Delete
-    suspend fun delete(soldier: Soldier)
+    @Query("SELECT * FROM soldier WHERE serialNumber")
+    fun getSoldiersByYear(year: Int): LiveData<Soldier>
 }
 
 // todo(should express the "relation" of each entities - 1:N, N:M)

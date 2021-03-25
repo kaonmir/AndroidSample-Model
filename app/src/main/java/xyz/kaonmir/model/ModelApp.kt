@@ -6,19 +6,15 @@ import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
-import xyz.kaonmir.model.database.AppDatabase
+import xyz.kaonmir.model.repository.AppDatabase
 
 class ModelApp: Application() {
     override fun onCreate() {
         super.onCreate()
 
         val databaseModule = module {
-            single { AppDatabase.getInstance(applicationContext) } // singleton
+            single { AppDatabase.getInstance(applicationContext) }
 
-            // get(): Inject necessary component
-            // named()
-            // bind: additional binding with the component
-            // getProperty()
         }
 
 
@@ -27,7 +23,9 @@ class ModelApp: Application() {
             androidContext(this@ModelApp)// Use this context
             androidFileProperties()     // get properties from "assets/koin.properties"
 
-            modules(databaseModule)          // Module list
+            modules(listOf(
+                    databaseModule
+            )) // Module list
         }
     }
 }

@@ -6,18 +6,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import xyz.kaonmir.model.model.Soldier
-import xyz.kaonmir.model.database.AppDatabase
+import xyz.kaonmir.model.viewmodel.SoldierViewModel
 
 class MainActivity : AppCompatActivity() {
-    private val db: AppDatabase by inject()
 
-//    private val soldiers: MutableLiveData<MutableList<Soldier>> = MutableLiveData()
+    private lateinit var soldierViewModel: SoldierViewModel
+    private val soldiers: LiveData<MutableList<Soldier>> = LiveData()
 
     private lateinit var editTextName: EditText
     private lateinit var editTextSerialNumber: EditText
@@ -37,9 +35,12 @@ class MainActivity : AppCompatActivity() {
         // Set events
         setEvents()
 
-//        GlobalScope.launch {
-//            soldiers.value = db.soldierDao().getAll().toMutableList()
-//        }
+        // set viewModel
+        soldierViewModel = ViewModelProvider.of(this)
+
+        GlobalScope.launch {
+            soldiers.value = db.soldierDao().getAll().toMutableList()
+        }
     }
 
     private fun setEvents() {
