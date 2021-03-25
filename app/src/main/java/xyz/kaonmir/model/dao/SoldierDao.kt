@@ -12,14 +12,15 @@ import java.sql.Array
 @Dao
 interface SoldierDao: BaseDao<Soldier> {
     @Query("SELECT * FROM soldier")
-    fun getAll(): LiveData<List<Soldier>>
+    fun getAll(): List<Soldier>
 
     @Query("SELECT * FROM soldier WHERE serialNumber LIKE ':year-%'")
-    fun getSoldierBySerialNumber(year: Int): LiveData<List<Soldier>>
+    fun getSoldierBySerialNumber(year: Int): List<Soldier>
 
     @Query("SELECT * FROM soldier WHERE serialNumber")
-    fun getSoldiersByYear(year: Int): LiveData<Soldier>
+    fun getSoldiersByYear(year: Int): Soldier
 }
 
 // todo(should express the "relation" of each entities - 1:N, N:M)
 // todo(transaction annotation)
+// todo(liveData)

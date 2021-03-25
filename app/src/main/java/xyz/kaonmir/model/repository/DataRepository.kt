@@ -8,6 +8,6 @@ import org.koin.core.component.get
 class DataRepository: KoinComponent {
     val database: AppDatabase = get()
 
-    fun getSoldierRepo() = SoldierRepository.getInstance(this)
+    val soldierRepo: SoldierRepository = get()
 
 }

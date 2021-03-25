@@ -9,8 +9,10 @@ import xyz.kaonmir.model.model.Unit
 @Dao
 interface UnitDao: BaseDao<Unit> {
     @Query("SELECT * FROM unit")
-    fun getAll(): LiveData<List<Unit>>
+    fun getAll(): List<Unit>
 
     @Query("SELECT * FROM unit WHERE unit_id = :id")
-    fun getUnitById(id: Int): LiveData<Unit>
+    fun getUnitById(id: Int): Unit
 }
+
+// todo(liveData)

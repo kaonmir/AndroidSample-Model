@@ -5,22 +5,10 @@ import org.koin.core.component.KoinApiExtension
 import xyz.kaonmir.model.dao.SoldierDao
 import xyz.kaonmir.model.model.Soldier
 
-@KoinApiExtension
-class SoldierRepository(private val dataRepository: DataRepository) {
-    companion object {
-        @Volatile
-        private var instance: SoldierRepository? = null
+class SoldierRepository(private val appDatabase: AppDatabase) {
 
-        fun getInstance(dataRepository: DataRepository): SoldierRepository {
-            return instance ?: synchronized(this) {
-                instance ?: SoldierRepository(dataRepository).also { instance = it }
-            }
-        }
-    }
+    private val soldierDao: SoldierDao = appDatabase.soldierDao()
 
-    private val soldierDao: SoldierDao
-        get() = dataRepository.database.soldierDao()
-
-    private val
+    fun getAll() = soldierDao.getAll()
 
 }

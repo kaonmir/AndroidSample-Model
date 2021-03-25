@@ -9,13 +9,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import xyz.kaonmir.model.model.Soldier
 import xyz.kaonmir.model.viewmodel.SoldierViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var soldierViewModel: SoldierViewModel
-    private val soldiers: LiveData<MutableList<Soldier>> = LiveData()
+    private val soldierViewModel: SoldierViewModel by viewModel()
 
     private lateinit var editTextName: EditText
     private lateinit var editTextSerialNumber: EditText
@@ -35,12 +35,6 @@ class MainActivity : AppCompatActivity() {
         // Set events
         setEvents()
 
-        // set viewModel
-        soldierViewModel = ViewModelProvider.of(this)
-
-        GlobalScope.launch {
-            soldiers.value = db.soldierDao().getAll().toMutableList()
-        }
     }
 
     private fun setEvents() {
