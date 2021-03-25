@@ -15,9 +15,9 @@ import xyz.kaonmir.model.repository.SoldierRepository
 
 // todo(disposable checking)
 
+// todo(coroutine)
+
 @KoinApiExtension
 class SoldierViewModel(database: DataRepository): ViewModel() {
-    private val soldiers: List<Soldier> by lazy {
-        database.soldierRepo.getAll()
-    }
+    private val soldiers: List<Soldier> = database.soldierRepo.getAll() // todo(check if lazy)
 }

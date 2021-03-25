@@ -35,7 +35,7 @@ class ModelApp: Application() {
         startKoin {
             androidLogger()                           // Use Koin logger instead of Android logger
             androidContext(this@ModelApp)// Use this context
-            androidFileProperties()     // get properties from "assets/koin.properties"
+            androidFileProperties()                   // get properties from "assets/koin.properties"
 
             modules(databaseModule)
             modules(viewModelModule)
