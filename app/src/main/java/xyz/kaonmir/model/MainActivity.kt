@@ -1,24 +1,22 @@
 package xyz.kaonmir.model
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinApiExtension
 import xyz.kaonmir.model.model.Soldier
 import xyz.kaonmir.model.viewmodel.SoldierViewModel
 
 @KoinApiExtension
 class MainActivity : AppCompatActivity() {
-
-    private val soldierViewModel: SoldierViewModel by viewModel()
-    private val soldiers = soldierViewModel.al
+    private lateinit var soldierViewModel: SoldierViewModel
+    private lateinit var soldiers: LiveData<List<Soldier>>
 
     private lateinit var editTextName: EditText
     private lateinit var editTextSerialNumber: EditText
@@ -35,22 +33,28 @@ class MainActivity : AppCompatActivity() {
         textViewResult = findViewById(R.id.tv_result)
         buttonSubmit = findViewById(R.id.btn_submit)
 
+        val factory = SoldierViewModel.Companion.Factory(application)
+        soldierViewModel = ViewModelProvider(viewModelStore, factory)
+            .get(SoldierViewModel::class.java)
+        soldiers = soldierViewModel.soldiers
+
         // Set events
         setEvents()
 
     }
 
     private fun setEvents() {
+        soldiers.observe(this, Observer {
+            if (it == null || it.isEmpty()) return@Observer
+            updateUI()
+        })
         buttonSubmit.setOnClickListener {
             val name = editTextName.text.toString()
             val serialNumber = editTextSerialNumber.text.toString()
 
             // Validation 검사 해야함
-
-//            GlobalScope.launch {
-//                soldiers.value?.add(newSoldier)
-//                db.soldierDao().insertAll(newSoldier)
-//            }
+            soldierViewModel.insert(Soldier(serialNumber, name))
+            // todo(F.name, M.name, L.name 으로 결국 바꾸기)
         }
 
     }
@@ -58,6 +62,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI() {
         textViewResult.text = soldiers.value?.joinToString(separator = "\n") { it.toString() }
     }
+
 }
 
 // todo(learn about viewModel)

@@ -5,13 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import xyz.kaonmir.model.dao.SoldierDao
-import xyz.kaonmir.model.dao.UnitDao
 import xyz.kaonmir.model.model.Soldier
 
-@Database(entities = [Soldier::class], version = 1)
+@Database(entities = [
+    Soldier::class
+                     ], version = 1)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun soldierDao(): SoldierDao
-    abstract fun unitDao(): UnitDao
+//    abstract fun unitDao(): UnitDao
 
     companion object {
         @Volatile
