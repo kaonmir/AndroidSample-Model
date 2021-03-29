@@ -15,6 +15,7 @@ import xyz.kaonmir.model.data.repository.SoldierRepository
 
 // todo(disposable checking)
 // todo(fail to make viewModel to dependency injection
+// todo(decouple between viewModel and repository directly)
 
 class SoldierViewModel(application: Application): AndroidViewModel(application) {
     private val soldierRepository: SoldierRepository = application.get()
