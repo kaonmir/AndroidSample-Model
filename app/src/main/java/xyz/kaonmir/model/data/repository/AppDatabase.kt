@@ -1,11 +1,11 @@
-package xyz.kaonmir.model.repository
+package xyz.kaonmir.model.data.repository
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import xyz.kaonmir.model.dao.SoldierDao
-import xyz.kaonmir.model.model.Soldier
+import xyz.kaonmir.model.data.dao.SoldierDao
+import xyz.kaonmir.model.data.model.Soldier
 
 @Database(entities = [
     Soldier::class

@@ -1,8 +1,6 @@
-package xyz.kaonmir.model.dao
+package xyz.kaonmir.model.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import xyz.kaonmir.model.model.Soldier
 
 // todo(suspend 쓰는 것의 기준)
 @Dao

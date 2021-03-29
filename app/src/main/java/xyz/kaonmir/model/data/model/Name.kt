@@ -1,4 +1,4 @@
-package xyz.kaonmir.model.model
+package xyz.kaonmir.model.data.model
 
 data class Name(
     val firstName: String,

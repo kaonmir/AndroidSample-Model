@@ -1,7 +1,6 @@
-package xyz.kaonmir.model.model
+package xyz.kaonmir.model.data.model
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
 
 @Entity
 data class Soldier(

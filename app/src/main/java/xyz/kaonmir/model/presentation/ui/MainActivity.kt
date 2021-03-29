@@ -1,4 +1,4 @@
-package xyz.kaonmir.model
+package xyz.kaonmir.model.presentation.ui
 
 import android.os.Bundle
 import android.widget.Button
@@ -10,9 +10,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import org.koin.core.component.KoinApiExtension
-import xyz.kaonmir.model.model.Name
-import xyz.kaonmir.model.model.Soldier
-import xyz.kaonmir.model.viewmodel.SoldierViewModel
+import xyz.kaonmir.model.R
+import xyz.kaonmir.model.data.model.Name
+import xyz.kaonmir.model.data.model.Soldier
+import xyz.kaonmir.model.presentation.viewmodel.SoldierViewModel
 import java.util.regex.Pattern
 
 @KoinApiExtension

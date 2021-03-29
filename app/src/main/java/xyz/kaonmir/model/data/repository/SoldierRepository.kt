@@ -1,9 +1,7 @@
-package xyz.kaonmir.model.repository
+package xyz.kaonmir.model.data.repository
 
-import androidx.lifecycle.LiveData
-import org.koin.core.component.KoinApiExtension
-import xyz.kaonmir.model.dao.SoldierDao
-import xyz.kaonmir.model.model.Soldier
+import xyz.kaonmir.model.data.dao.SoldierDao
+import xyz.kaonmir.model.data.model.Soldier
 
 class SoldierRepository(private val appDatabase: AppDatabase) {
 
