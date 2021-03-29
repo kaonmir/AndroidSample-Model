@@ -1,19 +1,16 @@
 package xyz.kaonmir.model.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
+import androidx.room.*
 import xyz.kaonmir.model.model.Soldier
 
 // todo(suspend 쓰는 것의 기준)
 @Dao
 interface BaseDao<T> {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(obj: T)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(vararg obj: T)
 
     @Update

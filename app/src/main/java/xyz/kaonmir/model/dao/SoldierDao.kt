@@ -14,8 +14,8 @@ interface SoldierDao: BaseDao<Soldier> {
     @Query("SELECT * FROM soldier")
     fun getAll(): LiveData<List<Soldier>>
 
-//    @Query("SELECT * FROM soldier WHERE serialNumber LIKE :year || '-%'")
-//    fun getSoldiersByYear(year: Int): LiveData<List<Soldier>>
+    @Query("SELECT * FROM soldier WHERE serialNumber LIKE :year || '-%'")
+    fun getSoldiersByYear(year: Int): LiveData<List<Soldier>>
 
     @Query("SELECT * FROM soldier WHERE serialNumber = :serialNumber")
     fun getSoldierBySerialNumber(serialNumber: Int): Soldier

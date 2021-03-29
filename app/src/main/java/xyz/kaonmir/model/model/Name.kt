@@ -5,5 +5,5 @@ data class Name(
     val middleName: String?,
     val lastName: String
     ) {
-    override fun toString(): String = "$lastName, $firstName. $middleName"
+    override fun toString(): String = "$lastName, $firstName" + if (middleName != null) ". $middleName" else ""
 }

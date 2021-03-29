@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinApiExtension
+import xyz.kaonmir.model.model.Name
 import xyz.kaonmir.model.model.Soldier
 import xyz.kaonmir.model.viewmodel.SoldierViewModel
+import java.util.regex.Pattern
 
 @KoinApiExtension
 class MainActivity : AppCompatActivity() {
@@ -40,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         // Set events
         setEvents()
-
     }
 
     private fun setEvents() {
@@ -53,8 +55,18 @@ class MainActivity : AppCompatActivity() {
             val serialNumber = editTextSerialNumber.text.toString()
 
             // Validation 검사 해야함
-            soldierViewModel.insert(Soldier(serialNumber, name))
-            // todo(F.name, M.name, L.name 으로 결국 바꾸기)
+            val nameRegexMil = " *([a-zA-Z]+) *, *([a-zA-Z ]+) *(?:\\. *([a-zA-Z]+))? *" // military style
+
+            // todo(civilian style)
+//            val nameRegex = "([a-zA-Z]),([a-zA-Z])?(?:\\.([a-zA-Z]))"
+
+            val matcher = Pattern.compile(nameRegexMil).matcher(name)
+            if (matcher.matches()) {
+                val newName = Name(matcher.group(2)!!, matcher.group(3), matcher.group(1)!!)
+                soldierViewModel.insert(Soldier(serialNumber, newName))
+            } else {
+                Toast.makeText(applicationContext, "Name", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

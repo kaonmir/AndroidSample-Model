@@ -14,7 +14,7 @@ class SoldierRepository(private val appDatabase: AppDatabase) {
     suspend fun delete(inputSoldier: Soldier) = soldierDao.delete(inputSoldier)
 
     fun getAll() = soldierDao.getAll()
-//    fun getSoldiersByYear(year: Int) = soldierDao.getSoldiersByYear(year)
-//    fun getSoldierBySerialNumber(serialNumber: Int) = soldierDao.getSoldierBySerialNumber(serialNumber)
+    fun getSoldiersByYear(year: Int) = soldierDao.getSoldiersByYear(year)
+    fun getSoldierBySerialNumber(serialNumber: Int) = soldierDao.getSoldierBySerialNumber(serialNumber)
 
 }

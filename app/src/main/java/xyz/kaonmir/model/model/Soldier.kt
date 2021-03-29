@@ -7,8 +7,7 @@ import androidx.room.ForeignKey.CASCADE
 data class Soldier(
 //    val name: Name,
         @PrimaryKey val serialNumber: String = "",
-        val name: String = "",
-//    @Embedded val name: Name,
+        @Embedded val name: Name,
 //    @ColumnInfo(name = "unit_id") val unitId: Int = 0,
 ) {
     override fun toString(): String = "Name: $name, serial number: $serialNumber"
