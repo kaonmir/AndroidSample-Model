@@ -14,13 +14,12 @@ interface SoldierDao: BaseDao<Soldier> {
     @Query("SELECT * FROM soldier")
     fun getAll(): LiveData<List<Soldier>>
 
-    @Query("SELECT * FROM soldier WHERE serialNumber LIKE :year || '-%'")
+    @Query("SELECT * FROM soldier WHERE soldier_id LIKE :year || '-%'")
     fun getSoldiersByYear(year: Int): LiveData<List<Soldier>>
 
-    @Query("SELECT * FROM soldier WHERE serialNumber = :serialNumber")
+    @Query("SELECT * FROM soldier WHERE soldier_id = :serialNumber")
     fun getSoldierBySerialNumber(serialNumber: Int): Soldier
 }
 
 // todo(should express the "relation" of each entities - 1:N, N:M)
 // todo(transaction annotation)
-// todo(liveData)

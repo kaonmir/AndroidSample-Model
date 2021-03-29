@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinApiExtension
 import xyz.kaonmir.model.model.Name
 import xyz.kaonmir.model.model.Soldier
@@ -54,27 +53,29 @@ class MainActivity : AppCompatActivity() {
             val name = editTextName.text.toString()
             val serialNumber = editTextSerialNumber.text.toString()
 
-            // Validation 검사 해야함
             val nameRegexMil = " *([a-zA-Z]+) *, *([a-zA-Z ]+) *(?:\\. *([a-zA-Z]+))? *" // military style
+            val nameRegexCiv = " *([a-zA-Z]+) +([a-zA-Z]+)? +([a-zA-Z] *)"
 
-            // todo(civilian style)
-//            val nameRegex = "([a-zA-Z]),([a-zA-Z])?(?:\\.([a-zA-Z]))"
+            val matcherMil = Pattern.compile(nameRegexMil).matcher(name)
+            val matcherCiv = Pattern.compile(nameRegexCiv).matcher(name)
 
-            val matcher = Pattern.compile(nameRegexMil).matcher(name)
-            if (matcher.matches()) {
-                val newName = Name(matcher.group(2)!!, matcher.group(3), matcher.group(1)!!)
-                soldierViewModel.insert(Soldier(serialNumber, newName))
-            } else {
-                Toast.makeText(applicationContext, "Name", Toast.LENGTH_SHORT).show()
+            when {
+                matcherMil.matches() -> {
+                    val newName = Name(matcherMil.group(2)!!, matcherMil.group(3), matcherMil.group(1)!!)
+                    soldierViewModel.insert(Soldier(serialNumber, newName))
+                }
+                matcherCiv.matches() -> {
+                    val newName = Name(matcherMil.group(1)!!, matcherMil.group(2), matcherMil.group(3)!!)
+                    soldierViewModel.insert(Soldier(serialNumber, newName))
+                }
+                else -> {
+                    Toast.makeText(applicationContext, "Name should be like (F S L) or (L, F. M)", Toast.LENGTH_SHORT).show()
+                }
             }
         }
-
     }
 
     private fun updateUI() {
-        textViewResult.text = soldiers.value?.joinToString(separator = "\n") { it.toString() }
+        textViewResult.text = soldiers.value?.joinToString(separator = "\n")
     }
-
 }
-
-// todo(learn about viewModel)
