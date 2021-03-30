@@ -4,8 +4,11 @@ import xyz.kaonmir.model.data.dao.SoldierDao
 import xyz.kaonmir.model.data.model.Soldier
 
 // todo(cache)
+// todo(combination of remote and local)
+// use of repository? It has only meaning of gathering all model layers
+// If we use both remote and local database, isn't it be meaningful?
 
-class SoldierRepository(private val appDatabase: AppDatabase) {
+class SoldierRepository(appDatabase: AppDatabase) {
 
     private val soldierDao: SoldierDao = appDatabase.soldierDao()
 
