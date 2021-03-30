@@ -1,7 +1,7 @@
-package xyz.kaonmir.model.data.repository
+package xyz.kaonmir.model.domain.repositories
 
-import xyz.kaonmir.model.data.dao.SoldierDao
-import xyz.kaonmir.model.data.model.Soldier
+import xyz.kaonmir.model.data.daos.SoldierDao
+import xyz.kaonmir.model.data.entities.SoldierModel
 
 // todo(cache)
 // todo(combination of remote and local)
@@ -12,9 +12,9 @@ class SoldierRepository(appDatabase: AppDatabase) {
 
     private val soldierDao: SoldierDao = appDatabase.soldierDao()
 
-    suspend fun insert(inputSoldier: Soldier) = soldierDao.insert(inputSoldier)
-    suspend fun update(inputSoldier: Soldier) = soldierDao.update(inputSoldier)
-    suspend fun delete(inputSoldier: Soldier) = soldierDao.delete(inputSoldier)
+    suspend fun insert(inputSoldier: SoldierModel) = soldierDao.insert(inputSoldier)
+    suspend fun update(inputSoldier: SoldierModel) = soldierDao.update(inputSoldier)
+    suspend fun delete(inputSoldier: SoldierModel) = soldierDao.delete(inputSoldier)
 
     fun getAll() = soldierDao.getAll()
     fun getSoldiersByYear(year: Int) = soldierDao.getSoldiersByYear(year)

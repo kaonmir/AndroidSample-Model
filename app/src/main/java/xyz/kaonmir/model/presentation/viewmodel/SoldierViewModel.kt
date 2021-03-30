@@ -10,8 +10,8 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
-import xyz.kaonmir.model.data.model.Soldier
-import xyz.kaonmir.model.data.repository.SoldierRepository
+import xyz.kaonmir.model.data.entities.SoldierModel
+import xyz.kaonmir.model.domain.repositories.SoldierRepository
 
 // todo(disposable checking)
 // todo(fail to make viewModel to dependency injection
@@ -19,17 +19,17 @@ import xyz.kaonmir.model.data.repository.SoldierRepository
 
 class SoldierViewModel(application: Application): AndroidViewModel(application) {
     private val soldierRepository: SoldierRepository = application.get()
-    val soldiers: LiveData<List<Soldier>> = soldierRepository.getAll()
+    val soldiers: LiveData<List<SoldierModel>> = soldierRepository.getAll()
 
     private val viewModelJob = Job()
     private val viewModelScope = CoroutineScope(Main + viewModelJob)
 
-    fun contains(soldier: Soldier) = soldiers.value!!.contains(soldier)
+    fun contains(soldierModel: SoldierModel) = soldiers.value!!.contains(soldierModel)
 
-    fun insert(inputSoldier: Soldier) =
-            viewModelScope.launch { soldierRepository.insert(inputSoldier) }
-    fun delete(deleteSoldier: Soldier) =
-            viewModelScope.launch { soldierRepository.delete(deleteSoldier) }
+    fun insert(inputSoldierModel: SoldierModel) =
+            viewModelScope.launch { soldierRepository.insert(inputSoldierModel) }
+    fun delete(deleteSoldierModel: SoldierModel) =
+            viewModelScope.launch { soldierRepository.delete(deleteSoldierModel) }
 
 
     companion object {

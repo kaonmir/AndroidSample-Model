@@ -1,14 +1,14 @@
-package xyz.kaonmir.model.data.repository
+package xyz.kaonmir.model.domain.repositories
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import xyz.kaonmir.model.data.dao.SoldierDao
-import xyz.kaonmir.model.data.model.Soldier
+import xyz.kaonmir.model.data.daos.SoldierDao
+import xyz.kaonmir.model.data.entities.SoldierModel
 
 @Database(entities = [
-    Soldier::class
+    SoldierModel::class
                      ], version = 1)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun soldierDao(): SoldierDao
@@ -28,7 +28,8 @@ abstract class AppDatabase: RoomDatabase() {
 
         private fun buildDatabase(context: Context): AppDatabase {
             return Room.databaseBuilder(context.applicationContext,
-                    AppDatabase::class.java, DB_NAME).build().also { INSTANCE = it }
+                    AppDatabase::class.java, DB_NAME)
+                    .build().also { INSTANCE = it }
         }
 
         fun destroyInstance() {

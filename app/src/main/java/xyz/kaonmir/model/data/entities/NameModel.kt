@@ -1,6 +1,6 @@
-package xyz.kaonmir.model.data.model
+package xyz.kaonmir.model.data.entities
 
-data class Name(
+data class NameModel(
     val firstName: String,
     val middleName: String?,
     val lastName: String

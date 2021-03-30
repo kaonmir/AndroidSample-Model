@@ -1,4 +1,4 @@
-package xyz.kaonmir.model.data.dao
+package xyz.kaonmir.model.data.daos
 
 import androidx.room.*
 

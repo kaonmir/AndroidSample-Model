@@ -11,15 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import org.koin.core.component.KoinApiExtension
 import xyz.kaonmir.model.R
-import xyz.kaonmir.model.data.model.Name
-import xyz.kaonmir.model.data.model.Soldier
+import xyz.kaonmir.model.data.entities.NameModel
+import xyz.kaonmir.model.data.entities.SoldierModel
 import xyz.kaonmir.model.presentation.viewmodel.SoldierViewModel
 import java.util.regex.Pattern
 
 @KoinApiExtension
 class MainActivity : AppCompatActivity() {
     private lateinit var soldierViewModel: SoldierViewModel
-    private lateinit var soldiers: LiveData<List<Soldier>>
+    private lateinit var soldiers: LiveData<List<SoldierModel>>
 
     private lateinit var editTextName: EditText
     private lateinit var editTextSerialNumber: EditText
@@ -62,12 +62,12 @@ class MainActivity : AppCompatActivity() {
 
             when {
                 matcherMil.matches() -> {
-                    val newName = Name(matcherMil.group(2)!!, matcherMil.group(3), matcherMil.group(1)!!)
-                    soldierViewModel.insert(Soldier(serialNumber, newName))
+                    val newName = NameModel(matcherMil.group(2)!!, matcherMil.group(3), matcherMil.group(1)!!)
+                    soldierViewModel.insert(SoldierModel(serialNumber, newName))
                 }
                 matcherCiv.matches() -> {
-                    val newName = Name(matcherMil.group(1)!!, matcherMil.group(2), matcherMil.group(3)!!)
-                    soldierViewModel.insert(Soldier(serialNumber, newName))
+                    val newName = NameModel(matcherMil.group(1)!!, matcherMil.group(2), matcherMil.group(3)!!)
+                    soldierViewModel.insert(SoldierModel(serialNumber, newName))
                 }
                 else -> {
                     Toast.makeText(applicationContext, "Name should be like (F S L) or (L, F. M)", Toast.LENGTH_SHORT).show()
