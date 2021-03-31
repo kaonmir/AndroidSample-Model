@@ -11,25 +11,25 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import xyz.kaonmir.model.data.entities.SoldierModel
-import xyz.kaonmir.model.domain.repositories.SoldierRepository
+import xyz.kaonmir.model.data.repositories.SoldierRepository
+import xyz.kaonmir.model.domain.usecases.SoldierUseCase
 
 // todo(disposable checking)
 // todo(fail to make viewModel to dependency injection
-// todo(decouple between viewModel and repository directly)
 
 class SoldierViewModel(application: Application): AndroidViewModel(application) {
-    private val soldierRepository: SoldierRepository = application.get()
-    val soldiers: LiveData<List<SoldierModel>> = soldierRepository.getAll()
+    private val soldierUseCase: SoldierUseCase = application.get()
+    val soldiers: LiveData<List<SoldierModel>> = soldierUseCase.getAllSoldiers()
 
     private val viewModelJob = Job()
     private val viewModelScope = CoroutineScope(Main + viewModelJob)
 
     fun contains(soldierModel: SoldierModel) = soldiers.value!!.contains(soldierModel)
 
-    fun insert(inputSoldierModel: SoldierModel) =
-            viewModelScope.launch { soldierRepository.insert(inputSoldierModel) }
+    fun insert(name: String, serialNumber: String) =
+            viewModelScope.launch { soldierUseCase.insertSoldier(name, serialNumber) }
     fun delete(deleteSoldierModel: SoldierModel) =
-            viewModelScope.launch { soldierRepository.delete(deleteSoldierModel) }
+            viewModelScope.launch { soldierUseCase.deleteSoldiers(deleteSoldierModel) }
 
 
     companion object {

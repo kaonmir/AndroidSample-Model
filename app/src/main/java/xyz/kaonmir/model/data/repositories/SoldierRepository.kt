@@ -1,4 +1,4 @@
-package xyz.kaonmir.model.domain.repositories
+package xyz.kaonmir.model.data.repositories
 
 import xyz.kaonmir.model.data.daos.SoldierDao
 import xyz.kaonmir.model.data.entities.SoldierModel
@@ -18,5 +18,5 @@ class SoldierRepository(appDatabase: AppDatabase) {
 
     fun getAll() = soldierDao.getAll()
     fun getSoldiersByYear(year: Int) = soldierDao.getSoldiersByYear(year)
-    fun getSoldierBySerialNumber(serialNumber: Int) = soldierDao.getSoldierBySerialNumber(serialNumber)
+    suspend fun getSoldierBySerialNumber(serialNumber: String) = soldierDao.getSoldierBySerialNumber(serialNumber)
 }

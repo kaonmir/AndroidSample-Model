@@ -14,7 +14,7 @@ interface SoldierDao: BaseDao<SoldierModel> {
     fun getSoldiersByYear(year: Int): LiveData<List<SoldierModel>>
 
     @Query("SELECT * FROM soldier WHERE soldier_id = :serialNumber")
-    fun getSoldierBySerialNumber(serialNumber: Int): SoldierModel
+    suspend fun getSoldierBySerialNumber(serialNumber: String): SoldierModel?
 }
 
 // todo(should express the "relation" of each entities - 1:N, N:M)

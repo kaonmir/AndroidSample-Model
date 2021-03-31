@@ -9,14 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import org.koin.core.component.KoinApiExtension
 import xyz.kaonmir.model.R
-import xyz.kaonmir.model.data.entities.NameModel
 import xyz.kaonmir.model.data.entities.SoldierModel
+import xyz.kaonmir.model.domain.exceptions.SoldierExistsException
+import xyz.kaonmir.model.domain.exceptions.SoldierValidationException
 import xyz.kaonmir.model.presentation.viewmodel.SoldierViewModel
-import java.util.regex.Pattern
 
-@KoinApiExtension
 class MainActivity : AppCompatActivity() {
     private lateinit var soldierViewModel: SoldierViewModel
     private lateinit var soldiers: LiveData<List<SoldierModel>>
@@ -54,23 +52,16 @@ class MainActivity : AppCompatActivity() {
             val name = editTextName.text.toString()
             val serialNumber = editTextSerialNumber.text.toString()
 
-            val nameRegexMil = " *([a-zA-Z]+) *, *([a-zA-Z ]+) *(?:\\. *([a-zA-Z]+))? *" // military style
-            val nameRegexCiv = " *([a-zA-Z]+) +([a-zA-Z]+)? +([a-zA-Z] *)"
-
-            val matcherMil = Pattern.compile(nameRegexMil).matcher(name)
-            val matcherCiv = Pattern.compile(nameRegexCiv).matcher(name)
-
-            when {
-                matcherMil.matches() -> {
-                    val newName = NameModel(matcherMil.group(2)!!, matcherMil.group(3), matcherMil.group(1)!!)
-                    soldierViewModel.insert(SoldierModel(serialNumber, newName))
-                }
-                matcherCiv.matches() -> {
-                    val newName = NameModel(matcherMil.group(1)!!, matcherMil.group(2), matcherMil.group(3)!!)
-                    soldierViewModel.insert(SoldierModel(serialNumber, newName))
-                }
-                else -> {
-                    Toast.makeText(applicationContext, "Name should be like (F S L) or (L, F. M)", Toast.LENGTH_SHORT).show()
+            try {
+                soldierViewModel.insert(name, serialNumber)
+            } catch (e: Exception) {
+                when(e) {
+                    is SoldierExistsException ->
+                        Toast.makeText(applicationContext, R.string.soldierExistsException, Toast.LENGTH_SHORT).show()
+                    is SoldierValidationException ->
+                        Toast.makeText(applicationContext, R.string.soldierValidationException, Toast.LENGTH_SHORT).show()
+                    else ->
+                        Toast.makeText(applicationContext, R.string.defaultException, Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -1,4 +1,4 @@
-package xyz.kaonmir.model.domain.repositories
+package xyz.kaonmir.model.data.repositories
 
 import android.content.Context
 import androidx.room.Database

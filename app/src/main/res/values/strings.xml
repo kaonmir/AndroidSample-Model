@@ -3,4 +3,9 @@
     <string name="name">이름</string>
     <string name="serial_number">군번</string>
     <string name="submit">제출</string>
+
+    <string name="defaultException">There is unknown exception</string>
+    <string name="soldierExistsException"> Some soldier is already using that serial number</string>
+    <string name="soldierValidationException">Name should be like (F S L) or (L, F. M)</string>
+
 </resources>
